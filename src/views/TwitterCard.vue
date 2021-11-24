@@ -42,8 +42,8 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component
 export default class TwitterCard extends Vue {
-    @Prop() comment: string
-    @Prop() avatar: string
-    @Prop() name: string
+    @Prop() comment: any
+    @Prop() avatar: any
+    @Prop() name: any
 }
 </script>
