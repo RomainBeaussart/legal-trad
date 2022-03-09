@@ -1,52 +1,47 @@
 <template>
-<v-container fluid>
-    <v-row no-gutters>
-        <v-col cols="3">
-            <v-btn
-                outlined
-                large
-                @click="add1()"
-            >
-                Add 1
-            </v-btn>
-        </v-col>
-        <v-col cols="3">
-            <v-text-field
-                v-model="customText"
-                label="Custom text"
-            >
-            </v-text-field>
-        </v-col>
-        <v-col cols="3" class="d-flex justify-center align-center">
-            Count: {{ count }}
-        </v-col>
-    </v-row>
-    <v-row no-gutters>
-        <v-col cols="12" v-for="c in count" :key="c">
-            {{ text }} {{ c }}
-        </v-col>
-    </v-row>
-</v-container>
+  <v-container fluid>
+    <cards :items="items">
+      <template #card="props">
+        <v-card>
+          <v-card-title> {{ props.title }} - {{ props.index }} </v-card-title>
+          <v-card-text>
+            {{ props.text }}
+          </v-card-text>
+        </v-card>
+      </template>
+      <template #activator>
+        <v-btn @click="count++"> Activation </v-btn>
+      </template>
+    </cards>
+  </v-container>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from "vue-property-decorator";
 
-@Component
+import Cards from "./Cards.vue";
+
+@Component({
+  components: {
+    Cards,
+  },
+})
 export default class Home extends Vue {
-    count = 0
+  items = [
+    {
+      title: "Titre 1",
+      text: "Lorem ipsum blablabla",
+    },
+    {
+      title: "Titre 2",
+      text: "Lorem ipsum blablabla",
+    },
+    {
+      title: "Titre 3",
+      text: "Lorem ipsum blablabla",
+    },
+  ];
 
-    customText = ''
-
-    get text () {
-      if (this.customText) {
-        return this.customText
-      }
-      return 'Line'
-    }
-
-    add1 () {
-      this.count++
-    }
+  count = 0;
 }
 </script>
